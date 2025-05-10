@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estrelas em Fuga</title>
+  <title>Projetos</title>
+  <link rel="stylesheet" href="projeto.css">
   <style>
     html, body {
       margin: 0;
@@ -11,6 +12,7 @@
       overflow: hidden;
       background: black;
       height: 100%;
+      font-family: sans-serif;
     }
 
     canvas {
@@ -18,11 +20,75 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 0;
+    }
+
+    .center-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      text-align: center;
+    }
+
+    .center-button a {
+      background: #ffffff10;
+      color: white;
+      padding: 12px 24px;
+      border: 2px solid white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .center-button a:hover {
+      background: white;
+      color: black;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="../index.html">Allan Simão</a>
+    </div>
+    <button class="navbar-toggle" id="navbar-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="navbar-links" id="navbar-links">
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+        <li><a href="../projeto/projeto.html">Projetos</a></li>
+        <li><a href="../contato/contato.html">Contato</a></li>
+      </ul>
+    </div>
+    <button id="toggle-theme" class="theme-btn" aria-label="Alternar tema">🌙</button>
+  </nav>
   <canvas id="stars"></canvas>
+
+  <div class="center-button">
+    <a href="https://github.com/allan-max" target="_blank">GitHub</a>
+  </div>
+
+  
+  <script src="../tema.js"></script>
+  <script>
+    // Toggle Navbar Mobile
+    const toggleBtn = document.getElementById("navbar-toggle");
+    const navbarLinks = document.getElementById("navbar-links");
+    toggleBtn.addEventListener("click", () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      navbarLinks.classList.toggle("show");
+    });
+  </script>
+
   <script>
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
@@ -35,7 +101,6 @@
 
     const cursor = { x: width / 2, y: height / 2 };
 
-    // Gerar as estrelas com posições aleatórias
     for (let i = 0; i < numStars; i++) {
       stars.push({
         x: Math.random() * width,
@@ -45,44 +110,37 @@
       });
     }
 
-    // Ajustar o tamanho do canvas quando a janela é redimensionada
     window.addEventListener("resize", () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     });
 
-    // Atualizar a posição do cursor
     window.addEventListener("mousemove", e => {
       cursor.x = e.clientX;
       cursor.y = e.clientY;
     });
 
     function animate() {
-      // Limpar o canvas
       ctx.clearRect(0, 0, width, height);
 
-      // Desenhar e animar as estrelas
       for (let star of stars) {
         const dx = star.x - cursor.x;
         const dy = star.y - cursor.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // Afastar as estrelas quando próximas ao cursor
         if (dist < 100) {
           const angle = Math.atan2(dy, dx);
-          const move = (100 - dist) * 0.1; // Aumentar o fator para mais afastamento
+          const move = (100 - dist) * 0.1;
           star.x += Math.cos(angle) * move;
           star.y += Math.sin(angle) * move;
         }
 
-        // Desenhar a estrela no canvas
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fillStyle = "white";
         ctx.fill();
       }
 
-      // Chamar a função de animação de forma contínua
       requestAnimationFrame(animate);
     }
 

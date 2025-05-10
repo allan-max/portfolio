@@ -19,7 +19,7 @@
       <ul>
         <li><a href="../index.html">Início</a></li>
         <li><a href="../sobre/sobre.html">Sobre</a></li>
-        <li><a href="#">Projetos</a></li>
+        <li><a href="../projeto/projeto.html">Projetos</a></li>
         <li><a href="contato.html" aria-current="page">Contato</a></li>
       </ul>
     </div>
@@ -52,5 +52,16 @@
 
   <script src="../tema.js"></script>
   <script src="contato.js"></script>
+
+  <script>
+    // Toggle Navbar Mobile
+    const toggleBtn = document.getElementById("navbar-toggle");
+    const navbarLinks = document.getElementById("navbar-links");
+    toggleBtn.addEventListener("click", () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      navbarLinks.classList.toggle("show");
+    });
+  </script>
 </body>
 </html>
