@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrelas em Fuga</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      height: 100%;
+    }
+
+    canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const numStars = 150;
+    const stars = [];
+
+    const cursor = { x: width / 2, y: height / 2 };
+
+    // Gerar as estrelas com posições aleatórias
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 2 + 1,
+        speed: Math.random() * 0.5 + 0.2,
+      });
+    }
+
+    // Ajustar o tamanho do canvas quando a janela é redimensionada
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Atualizar a posição do cursor
+    window.addEventListener("mousemove", e => {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
+    });
+
+    function animate() {
+      // Limpar o canvas
+      ctx.clearRect(0, 0, width, height);
+
+      // Desenhar e animar as estrelas
+      for (let star of stars) {
+        const dx = star.x - cursor.x;
+        const dy = star.y - cursor.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        // Afastar as estrelas quando próximas ao cursor
+        if (dist < 100) {
+          const angle = Math.atan2(dy, dx);
+          const move = (100 - dist) * 0.1; // Aumentar o fator para mais afastamento
+          star.x += Math.cos(angle) * move;
+          star.y += Math.sin(angle) * move;
+        }
+
+        // Desenhar a estrela no canvas
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+      }
+
+      // Chamar a função de animação de forma contínua
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>

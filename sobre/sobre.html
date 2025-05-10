@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre • Allan Simão</title>
+  <link rel="stylesheet" href="sobre.css" />
+</head>
+<body>
+  <!-- Navbar (mantida sem alterações) -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a href="../index.html">Allan Simão</a>
+    </div>
+    <button class="navbar-toggle" id="navbar-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="navbar-links" id="navbar-links">
+      <ul>
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+        <li><a href="../projeto/projeto.html">Projetos</a></li>
+        <li><a href="../contato/contato.html">Contato</a></li>
+      </ul>
+    </div>
+    <button id="toggle-theme" class="theme-btn" aria-label="Alternar tema">🌙</button>
+  </nav>
+
+  <!-- Hero Preto e Branco com Typewriter -->
+  <section class="hero monochrome">
+    <div class="hero-content">
+      <h1 class="typewriter">Prazer, eu sou <span>Allan Simão</span></h1>
+      <p>Desenvolvedor Front-end criando experiências elegantes e responsivas.</p>
+    </div>
+  </section>
+
+  <!-- Seção Pessoal com Animações -->
+  <section class="personal">
+    <h2>Sobre Mim</h2>
+    <div class="personal-cards">
+      <div class="card animated" style="--delay:0.1s;">
+        <h3>Idade</h3>
+        <p>19 anos</p>
+      </div>
+      <div class="card animated" style="--delay:0.3s;">
+        <h3>Educação</h3>
+        <p>Ciência da Computação na UVV<br>Inglês na Wizard</p>
+      </div>
+      <div class="card animated" style="--delay:0.5s;">
+        <h3>Estudos Atuais</h3>
+        <p>Node.js, React, Python</p>
+      </div>
+      <div class="card animated" style="--delay:0.7s;">
+        <h3>Lazer</h3>
+        <p>Basquete, jogos virtuais, academia</p>
+      </div>
+      <!-- Novo Card de Currículo -->
+      <div class="card animated" style="--delay:0.9s;">
+        <h3>Currículo</h3>
+        <p><a href="../certificados" target="_blank" rel="noopener">Ver Currículo</a></p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Info Cards -->
+  <section class="info">
+    <div class="card">
+      <h2>Habilidades</h2>
+      <ul>
+        <li>HTML5 & CSS3</li>
+        <li>Trabalho em equipe</li>
+        <li>JavaScript</li>
+        <li>Design Responsivo</li>
+        <li>Otimização de Performance</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Experiência</h2>
+      <p><strong>Em busca de oportunidade</strong></p>
+      <ul>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Seção de Certificados -->
+  <section id="certificados" class="certificates container">
+    <h2>Certificados</h2>
+    <div class="cert-cards">
+      <div class="card">
+        <a href="../certificados/Comunicação estratégica e trab.pdf" target="_blank" rel="noopener">Comunicação estratégica</a>
+      </div>
+      <div class="card">
+        <a href="../certificados/introdução python certificado.pdf" target="_blank" rel="noopener">introdução python</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (mantido sem alterações) -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Allan Simão. Todos os direitos reservados.</p>
+      <div class="socials">
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="GitHub">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Global de Tema e Navbar -->
+  <script src="../tema.js"></script>
+  <script>
+    // Toggle Navbar Mobile
+    const toggleBtn = document.getElementById("navbar-toggle");
+    const navbarLinks = document.getElementById("navbar-links");
+    toggleBtn.addEventListener("click", () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      navbarLinks.classList.toggle("show");
+    });
+  </script>
+</body>
+</html>
